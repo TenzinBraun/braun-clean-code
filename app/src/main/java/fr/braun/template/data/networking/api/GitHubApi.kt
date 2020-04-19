@@ -17,11 +17,12 @@ interface GitHubApi {
         @Query("per_page") userPerPage: Int
     ): Response<List<GithubUser>>
 
-    fun getSearchGithubUsers(
-        accessToken: String,
-        query: String,
-        firstPage: Int,
-        userPerPage: Int
+    @GET(SEARCH_USERS)
+    suspend fun searchUsers(
+        @Header("Authorization") accessToken: String,
+        @Query("q", encoded = true) query: String,
+        @Query("page") firstPage: Int,
+        @Query("per_page") userPerPage: Int
     ): Response<GitHubPagedResult<GithubUser>>
 
     @GET(DETAIL_USER)
@@ -33,5 +34,6 @@ interface GitHubApi {
     companion object {
         const val ALL_USER = "users"
         const val DETAIL_USER = "users/{username}"
+        const val SEARCH_USERS = "search/users"
     }
 }

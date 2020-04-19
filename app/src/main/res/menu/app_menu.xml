@@ -7,9 +7,4 @@
         android:title="@string/github_user_search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/filter_item"
-        android:icon="@drawable/ic_filter_github_user"
-        android:title="@string/github_user_filter"
-        app:showAsAction="ifRoom" />
 </menu>

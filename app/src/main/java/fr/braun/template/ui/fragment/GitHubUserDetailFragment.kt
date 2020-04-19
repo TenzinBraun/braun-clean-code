@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.bumptech.glide.Glide
 import fr.braun.template.R
+import fr.braun.template.extension.hide
 import fr.braun.template.extension.show
 import fr.braun.template.ui.activity.MainActivity
 import fr.braun.template.ui.viewmodel.GithubUserViewModel
@@ -58,6 +59,7 @@ class GitHubUserDetailFragment : Fragment() {
                 countPublicRepositoryContent.apply { text = user.publicRepositories.toString() }
                 countFollowersContent.apply { text = user.followers.toString() }
                 userEmailContent.apply { text = user.userEmail }
+                progressBarDetail.hide()
             }
         }
     }
