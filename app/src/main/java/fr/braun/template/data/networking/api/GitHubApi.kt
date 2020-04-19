@@ -18,7 +18,7 @@ interface GitHubApi {
     ): Response<List<GithubUser>>
 
     @GET(SEARCH_USERS)
-    suspend fun searchUsers(
+    suspend fun getSearchGithubUsers(
         @Header("Authorization") accessToken: String,
         @Query("q", encoded = true) query: String,
         @Query("page") firstPage: Int,
