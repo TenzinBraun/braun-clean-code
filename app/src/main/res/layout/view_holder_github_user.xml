@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_background"
-        android:foreground="?android:attr/selectableItemBackground"
-        tools:showIn="@layout/fragment_github_user_list">
+            tools:showIn="@layout/fragment_github_user_list">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/userAvatar"
@@ -25,7 +24,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -36,14 +34,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="52dp"
-            app:layout_constraintBottom_toTopOf="@id/holder_user_type"
+            android:textSize="@dimen/header_name_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/userID"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/userAvatar"
             app:layout_constraintTop_toTopOf="@id/userAvatar"
             tools:text="@tools:sample/full_names" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/holder_user_type"
+            android:id="@+id/userType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="52dp"
@@ -53,20 +53,19 @@
             tools:text="@tools:sample/cities" />
 
         <TextView
-            android:id="@+id/holder_user_id"
+            android:id="@+id/userID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@id/holder_user_type"
-            app:layout_constraintTop_toBottomOf="@id/holder_user_type"
-            tools:text="Date de création : 17/04/2019" />
+            app:layout_constraintStart_toStartOf="@id/userID"
+            app:layout_constraintTop_toBottomOf="@id/userID"
+            tools:text="created at : 19/04/2020" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:src="@drawable/ic_detail_user_chevron"
-            android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

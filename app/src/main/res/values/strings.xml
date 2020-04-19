@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">The GitHub App</string>
     <string name="app_toolbar_title">Github Users</string>
+    <string name="app_toolbar_detail_title">%1$s</string>
     <string name="github_user_search">Search</string>
     <string name="github_user_filter">Filter</string>
+    <string name="user_detail_date_created">Date de création</string>
+    <string name="user_detail_counter_public_repo">Nombre de Repository publiques</string>
+    <string name="user_detail_number_of_followers">Nombre de followers</string>
+    <string name="user_detail_email">Adresse Email</string>
 </resources>

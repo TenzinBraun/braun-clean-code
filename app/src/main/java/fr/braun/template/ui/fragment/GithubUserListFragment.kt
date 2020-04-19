@@ -5,12 +5,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.braun.template.R
+import fr.braun.template.data.model.GithubUser
 import fr.braun.template.extension.hide
 import fr.braun.template.extension.show
 import fr.braun.template.ui.activity.MainActivity
@@ -18,7 +21,7 @@ import fr.braun.template.ui.adapter.GithubUserAdapter
 import fr.braun.template.ui.viewmodel.GithubUserViewModel
 import kotlinx.android.synthetic.main.fragment_github_user_list.*
 
-class GithubUserListFragment : Fragment() {
+class GithubUserListFragment : Fragment(), ListActionCallback {
 
     private lateinit var githubUserAdapter: GithubUserAdapter
     private lateinit var githubUserViewModel: GithubUserViewModel
@@ -43,7 +46,7 @@ class GithubUserListFragment : Fragment() {
             this.setDisplayHomeAsUpEnabled(false)
         }
 
-        githubUserAdapter = GithubUserAdapter()
+        githubUserAdapter = GithubUserAdapter(this)
         githubUserListRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = githubUserAdapter
@@ -52,7 +55,7 @@ class GithubUserListFragment : Fragment() {
     }
 
     private fun setUpFetchLiveData() {
-        githubUserViewModel.githubUsers.observe(this){
+        githubUserViewModel.githubUsers.observe(this) {
             githubUserAdapter.submitList(it)
             hideProgressBar()
 
@@ -89,12 +92,27 @@ class GithubUserListFragment : Fragment() {
             }
         })
     }
+
     private fun showProgressBar() {
         progressBarGithubUserList.show()
         githubUserListRecyclerView.hide()
     }
+
     private fun hideProgressBar() {
         progressBarGithubUserList.hide()
         githubUserListRecyclerView.show()
     }
+
+    override fun onUserClickItem(githubUser: GithubUser) {
+        findNavController().navigate(
+            R.id.action_githubUserListFragment_to_gitHubUserDetailFragment,
+            bundleOf(
+                GitHubUserDetailFragment.LOGIN_KEY to githubUser.userLogin
+            )
+        )
+    }
+}
+
+interface ListActionCallback {
+    fun onUserClickItem(githubUser: GithubUser)
 }

@@ -10,6 +10,8 @@ import fr.braun.template.data.networking.createGithubApi
 import fr.braun.template.data.networking.datasource.GithubUserDataSource
 import fr.braun.template.data.networking.datasource.SearchGithubUserDataSource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 private class GithubUserRepositoryImpl(
@@ -49,16 +51,35 @@ private class GithubUserRepositoryImpl(
             ), pagedListConfig
         ).build()
     }
+
+    override suspend fun getDetailUserWith(username: String, accessToken: String): GithubUser? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = gitHubApi.getUserDetails(username, accessToken)
+                check(response.isSuccessful) { "Response is not a success : code = ${response.code()}" }
+                response.body() ?: throw IllegalStateException("Body is null")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        }
+    }
 }
 
 
 interface GithubUserRepository {
-    fun getGitHubUsers(viewModelScope: CoroutineScope, accessToken: String): LiveData<PagedList<GithubUser>>
+    fun getGitHubUsers(
+        viewModelScope: CoroutineScope,
+        accessToken: String
+    ): LiveData<PagedList<GithubUser>>
+
     fun getSearchedPagedListUsers(
         accessToken: String,
         query: String,
         viewModelScope: CoroutineScope
     ): LiveData<PagedList<GithubUser>>
+
+    suspend fun getDetailUserWith(username: String, accessToken: String) : GithubUser?
 
     companion object {
         val githubUserRepoInstance: GithubUserRepository by lazy {

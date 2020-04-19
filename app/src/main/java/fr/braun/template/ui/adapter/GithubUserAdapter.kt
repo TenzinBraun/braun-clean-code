@@ -4,13 +4,14 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.braun.template.data.model.GithubUser
+import fr.braun.template.ui.fragment.ListActionCallback
 import fr.braun.template.ui.widget.holder.GithubUserViewHolder
 
-class GithubUserAdapter : PagedListAdapter<GithubUser, GithubUserViewHolder>(Companion) {
+class GithubUserAdapter(private val callback : ListActionCallback) : PagedListAdapter<GithubUser, GithubUserViewHolder>(Companion) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder =
-        GithubUserViewHolder.create(parent)
+        GithubUserViewHolder.create(parent, callback)
 
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
         getItem(position)?.run { holder.bindViewWith(this) }
