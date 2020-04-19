@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_app_navigation_graph"
+    app:startDestination="@id/githubUserListFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/githubUserListFragment"
+        android:name="fr.braun.template.ui.fragment.GithubUserListFragment"
+        android:label="GithubUserListFragment"
+        tools:layout="@layout/fragment_github_user_list">
+        <action
+            android:id="@+id/action_githubUserListFragment_to_gitHubUserDetailFragment"
+            app:destination="@id/gitHubUserDetailFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />/>
+    </fragment>
+    <fragment
+        android:id="@+id/gitHubUserDetailFragment"
+        android:name="fr.braun.template.ui.fragment.GitHubUserDetailFragment"
+        android:label="GitHubUserDetailFragment"
+        tools:layout="@layout/fragment_github_user_details"/>
+</navigation>

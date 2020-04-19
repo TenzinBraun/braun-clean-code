@@ -1,4 +1,4 @@
-package fr.appsolute.template
+package fr.braun.template
 
 import org.junit.Test
 
